@@ -9,6 +9,14 @@
     <li>
       <h2>{{this.title}}</h2>
       <p>{{this.content}}</p>
+      <form action="/edit-post" method="GET" class="inline-form">
+        <input type="hidden" name="id" value="{{this._id}}">
+        <button type="submit" class="edit-button">수정하기</button>
+      </form>
+      <form action="/delete-post" method="POST" class="inline-form">
+        <input type="hidden" name="id" value="{{this._id}}">
+        <button type="submit" class="delete-button">삭제하기</button>
+      </form>
     </li>
   {{/each}}
 </ul>
