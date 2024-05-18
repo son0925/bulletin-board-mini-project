@@ -3,8 +3,14 @@ const Post = require("../models/model");
 
 async function getMainView(req,res) {
   const posts = await Post.find({});
-  console.log(posts);
-  res.render('index', {posts});
+  let isCheck = true;
+  if (posts.length === 0) {
+    isCheck = false;
+  }
+  res.render('index', {
+    isCheck,
+    posts
+  });
 }
 
 

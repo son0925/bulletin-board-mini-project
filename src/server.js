@@ -4,6 +4,7 @@ const app = express();
 const path = require('path');
 const uploadRouter = require('../routes/upload.router');
 const mongoose = require('mongoose');
+const postsRouter = require('../routes/posts.router');
 require('dotenv').config();
 
 // Template Engine Set
@@ -26,7 +27,8 @@ mongoose.connect(process.env.MONGODB_URL)
 
 
 app.use('/', mainRouter);
-app.use('/upload', uploadRouter)
+app.use('/upload', uploadRouter);
+app.use('/posts', postsRouter);
 
 
 

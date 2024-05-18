@@ -1,22 +1,12 @@
-<h1>게시판</h1>
-<form action="/upload" method="POST">
-  <input type="text" name="title" placeholder="제목" required>
-  <textarea name="content" placeholder="내용" required></textarea>
-  <button type="submit">제출</button>
-</form>
+<h1>자유 게시판</h1>
 <ul id="posts">
-  {{#each posts}}
-    <li>
-      <h2>{{this.title}}</h2>
-      <p>{{this.content}}</p>
-      <form action="/edit-post" method="GET" class="inline-form">
-        <input type="hidden" name="id" value="{{this._id}}">
-        <button type="submit" class="edit-button">수정하기</button>
-      </form>
-      <form action="/delete-post" method="POST" class="inline-form">
-        <input type="hidden" name="id" value="{{this._id}}">
-        <button type="submit" class="delete-button">삭제하기</button>
-      </form>
-    </li>
-  {{/each}}
+  {{#if isCheck}}
+    {{#each posts}}
+      <li>
+        <h4><a href="/posts/{{this._id}}">{{this.title}}</a></h4>
+      </li>
+    {{/each}}
+  {{else}} <p>아무 게시글이 없습니다</p>
+  {{/if}}
+  <li style="background-color: skyblue;"><a href="/posts/write">포스트쓰기</a></li>
 </ul>
