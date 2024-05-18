@@ -5,17 +5,17 @@
         const response = await fetch(`/posts/${postId}`, {
           method: 'delete'
         });
-
+        const responseData = await response.json();
         if (response.ok) {
-          alert('게시글이 삭제되었습니다')
+          alert(responseData.msg)
           window.location.href = '/';
         }
         else {
-          alert('게시글 삭제에 실패했습니다')
+          alert(responseData.msg)
         }
       } catch (err) {
         console.error("Error : ", err);
-        alert('게시글 삭제 중 오류가 발생했습니다');
+        alert(responseData.msg);
       }
     }
   }
@@ -24,5 +24,5 @@
 <h3>{{post.title}}</h3>
 <p>{{post.content}}</p>
 <a href="/">돌아가기</a>
-<a href="">수정하기</a>
+<a href="/posts/patch/{{post._id}}">수정하기</a>
 <button onclick="deletePost('{{post._id}}')">삭제하기</button>

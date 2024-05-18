@@ -10,24 +10,32 @@ async function getPost(req,res) {
   }
 }
 
-async function deletePost(req,res) {
+async function deletePost(req, res) {
   try {
-    console.log(req.params.id)
     await Post.findByIdAndDelete(req.params.id);
-    res.status(200).send({msg : '게시글이 삭제되었습니다'})
-  }
-  catch (err) {
-    res.status(500).send({msg: '게시글 삭제 중 오류가 발생했습니다'})
+    res.status(200).json({ msg: '게시글이 삭제되었습니다' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: '게시글 삭제 중 오류가 발생했습니다' });
   }
 }
+
 
 function writePost(req,res) {
   res.render('write')
 }
 
+async function getPatchPage(req,res) {
+  const post = await Post.findById(req.params.id);
+  res.render('patch', {post})
+}
+
+
+
 
 module.exports = {
   getPost,
   deletePost,
-  writePost
+  writePost,
+  getPatchPage
 }
